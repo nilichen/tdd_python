@@ -34,6 +34,6 @@ class ItemValidationTest(FunctionalTest):
 
         # And she correct it by filling some text in
         self.browser.find_element_by_id('id_new_item').send_keys('Make tea')
-        self.browser.find_element_by_css_selector('id_new_item').send_keys(Keys.ENTER)
+        self.browser.find_element_by_id('id_new_item').send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table('1: Buy milk')
-        self.wait_for_row_in_list_table('2. Make tea')
+        self.wait_for_row_in_list_table('2: Make tea')
