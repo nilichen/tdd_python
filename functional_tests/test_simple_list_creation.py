@@ -24,32 +24,21 @@ class NewVisitorTest(FunctionalTest):
 
         # She types "Buy peacock feathers" into a text box (edith's hobby 
         # is tying flying-fishing lures)
-        inputbox.send_keys('Buy peacock feathers')
-
         # When she hits enter, the page updates, and now the page lists
         # "1: Bue peacock feathers"  as an item in a to-to list
-        inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy peacock feathers')
+        self.add_list_item('Buy peacock feathers')
 
         # There is sitll a text box inviting her to add another item. She
         # enters "Use peacock feathers to make a fly" (Edith is very mothodical)
-        inputbox = self.get_item_input_box()
-        inputbox.send_keys('Use peacock feathers to make a fly')
-        inputbox.send_keys(Keys.ENTER)
-
+        self.add_list_item('Use peacock feathers to make a fly')
+        
         # The page updates again, and now shows both items on her list
-        self.wait_for_row_in_list_table('1: Buy peacock feathers')
-        self.wait_for_row_in_list_table('2: Use peacock feathers to make a fly')
-
         # Satisfied, she goes back to sleep
 
     def test_multiple_users_can_start_lists_at_different_urls(self):
         # Edith starts a new to-do list
         self.browser.get(self.live_server_url)
-        inputbox = self.get_item_input_box()
-        inputbox.send_keys('Buy peacock feathers')
-        inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy peacock feathers')
+        self.add_list_item('Buy peacock feathers')
 
         # She notices that her list has a unique URL
         edith_list_url = self.browser.current_url
@@ -69,10 +58,7 @@ class NewVisitorTest(FunctionalTest):
 
         # Francis starts a new list by entering a new item. He
         # is less interesting than Edith...
-        inputbox = self.get_item_input_box()
-        inputbox.send_keys('Buy milk')
-        inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy milk')
+        self.add_list_item('Buy milk')
 
         # Francis gets his own unique URL
         francis_list_url = self.browser.current_url

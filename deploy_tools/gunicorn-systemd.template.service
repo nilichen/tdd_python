@@ -5,8 +5,12 @@ Description=Gunicorn server for SITENAME
 Restart=on-failure
 User=ubuntu
 WorkingDirectory=/home/ubuntu/sites/SITENAME/source
-ExecStart=/home/ubuntu/sites/SITENAME/virtualenv/bin/gunicorn \
-  --bind unix:/tmp/SITENAME.socket \
+Environment=EMAIL_PASSWORD=SEKRIT
+ExecStart=/home/ubuntu/sites/katrina-dataing-staging.com/virtualenv/bin/gunicorn \
+  --bind unix:/tmp/katrina-dataing-staging.com.socket \
+  --capture-output \
+  --access-logfile ../access.log \
+  --error-logfile ../error.log \
   superlists.wsgi:application
 
 [Install]
