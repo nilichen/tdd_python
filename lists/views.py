@@ -25,5 +25,6 @@ def new_list(request):
         return redirect(list_)
     else:
         return render(request, 'home.html', {"form": form})
-    # return redirect('view_list', list_.id)
 
+def my_lists(request, email):
+    return render(request, 'my_lists.html')
